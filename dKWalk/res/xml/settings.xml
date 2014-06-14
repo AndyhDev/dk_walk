@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <com.dk.walk.util.EditTextIntegerPreference
+        android:key="weight"
+        android:maxLength="3"
+        android:numeric="integer"
+        android:defaultValue="60"
+        android:title="@string/pref_weight" />
+
+</PreferenceScreen>
