@@ -25,15 +25,16 @@ import android.util.Log;
 public class GPSservice extends Service implements StepListener {
 	private final IBinder binder = new MyBinder();
 	public static final String TAG = "GPSservice";
-	public final int GPS_STATE_START = 1;
-	public final int GPS_STATE_PAUSE = 2;
-	public final int GPS_STATE_STOP = 3;
+	public static final int GPS_STATE_START = 1;
+	public static final int GPS_STATE_PAUSE = 2;
+	public static final int GPS_STATE_STOP = 3;
 
 	public final int NOTIFY_ID = 1;
 
 	public final static String NEW_LOCATION = "new_locataion";
 	public final static String NEW_STEPS = "new_steps";
 	public final static String NEW_WAY = "new_way";
+	public final static String UPDATE_TIME = "update_time";
 	
 	private SQLWay currentWay;
 	private Boolean active = false;
@@ -123,6 +124,13 @@ public class GPSservice extends Service implements StepListener {
 		Intent action = new Intent(NEW_WAY);
 		sendBroadcast(action);
 	}
+	public void togglePauseState(){
+		if(GPSState == GPS_STATE_PAUSE){
+			resumeGPS();
+		}else if(GPSState == GPS_STATE_START){
+			pauseGPS();
+		}
+	}
 	public void pauseGPS(){
 		stepDetector.stop();
 		lm.removeUpdates(Loclist);
@@ -160,6 +168,8 @@ public class GPSservice extends Service implements StepListener {
 		public void run() {
 			if(active){
 				currentWay.addTime(1000);
+				Intent action = new Intent(UPDATE_TIME);
+				sendBroadcast(action);
 			}
 			handler.postDelayed(this, 1000);
 		}

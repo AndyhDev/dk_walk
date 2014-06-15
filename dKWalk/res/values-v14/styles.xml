@@ -6,18 +6,26 @@
         res/values-v11/styles.xml on API 14+ devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+
         <!-- API 14 theme customizations can go here. -->
         <item name="android:actionBarStyle">@style/MyActionBar</item>
-
     </style>
-	
+
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/blue</item>
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
     </style>
-    
+
     <style name="MyActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@color/white</item>
     </style>
-    
+
+    <style name="ButtonRedButton" parent="android:Widget.Holo.Light.Button">
+        <item name="android:background">@drawable/redbutton_btn_default_holo_light</item>
+    </style>
+
+    <style name="ImageButtonRedButton" parent="android:Widget.Holo.Light.ImageButton">
+        <item name="android:background">@drawable/redbutton_btn_default_holo_light</item>
+    </style>
+
 </resources>

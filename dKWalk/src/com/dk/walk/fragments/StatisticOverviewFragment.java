@@ -103,4 +103,10 @@ public class StatisticOverviewFragment extends ServiceFragment {
 	public void onServiceConnected() {
 		service = null;
 	}
+
+	@Override
+	public void onUpdateTime() {
+		// TODO Auto-generated method stub
+		
+	}
 }

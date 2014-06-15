@@ -61,6 +61,7 @@ public abstract class ServiceFragment extends Fragment{
 			IntentFilter intentFilter = new IntentFilter(GPSservice.NEW_LOCATION);
 			intentFilter.addAction(GPSservice.NEW_STEPS);
 			intentFilter.addAction(GPSservice.NEW_WAY);
+			intentFilter.addAction(GPSservice.UPDATE_TIME);
 			getActivity().registerReceiver(serviceReceiver, intentFilter);
 		}
 	}
@@ -88,6 +89,8 @@ public abstract class ServiceFragment extends Fragment{
 				onNewSteps();
 			}else if(intent.getAction().equals(GPSservice.NEW_WAY)){
 				onNewWay();
+			}else if(intent.getAction().equals(GPSservice.UPDATE_TIME)){
+				onUpdateTime();
 			}
 		}
 	}
@@ -96,4 +99,5 @@ public abstract class ServiceFragment extends Fragment{
 	public abstract void onNewLocation();
 	public abstract void onNewSteps();
 	public abstract void onNewWay();
+	public abstract void onUpdateTime();
 }

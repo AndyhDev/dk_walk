@@ -5,5 +5,7 @@
     <color name="bg">#FFF</color>
     <color name="blue2">#0B0B3B</color>
     <color name="white">#FFF</color>
+    <color name="green">#99CC00</color>
+    <color name="yellow">#ffbb33</color>
     
 </resources>
