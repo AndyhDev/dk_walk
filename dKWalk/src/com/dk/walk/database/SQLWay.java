@@ -1,5 +1,6 @@
 package com.dk.walk.database;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import org.json.JSONArray;
@@ -33,6 +34,8 @@ public class SQLWay {
 	
 	private Double speed;
 	private SharedPreferences prefs;
+	
+	private DecimalFormat format = new DecimalFormat("0.00");
 	
 	public SQLWay(){
 		title = "";
@@ -152,16 +155,25 @@ public class SQLWay {
 	public void addStep(){
 		steps++;
 	}
-	public Double getSpeed(){
+	private void actSpeed(){
 		double km = way / 1000f;
 		Log.d(TAG, "km:" + km);
 		double hours = time / 3600000f;
 		Log.d(TAG, "hours:" + hours + "  time:" + time);
 		speed = km / hours;
+	}
+	public Double getSpeed(){
+		actSpeed();
 		return speed;
+	}
+	
+	public String getFormatedSpeed(){
+		actSpeed();
+		return format.format(speed) + " km/h";
 	}
 	private void actCalories(){
 		Log.d(TAG, "1");
+		actSpeed();
 		if(speed != null && time != null){
 			Log.d(TAG, "2");
 			double cor;
@@ -244,13 +256,29 @@ public class SQLWay {
 	public Float getWay() {
 		return way;
 	}
-
+	
+	public String getFormatedWay(){
+		return format.format(way) + " m";
+	}
 	public void setWay(Float way) {
 		this.way = way;
 	}
 	
 	public Integer getTime() {
 		return time;
+	}
+	
+	public String getFormatedTime(){
+		Integer sec = time / 1000;
+		if(sec < 60){
+			return sec.toString() + " sec.";
+		}else if(sec < 3600){
+			Float min = (float) (sec / 60.0);
+			return format.format(min) + " min.";
+		}else{
+			Float hour = (float) (sec / 60.0 / 60.0);
+			return format.format(hour)+ "St.";
+		}
 	}
 
 	public void setTime(Integer time) {

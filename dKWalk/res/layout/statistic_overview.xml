@@ -65,9 +65,30 @@
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/textView2"
         android:layout_below="@+id/total_steps"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="17dp"
         android:text="@string/total_cal"
         android:textColor="@color/white"
         android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_below="@+id/total_cal"
+        android:layout_marginTop="17dp"
+        android:text="@string/total_duration"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/total_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/total_steps"
+        android:layout_alignTop="@+id/textView4"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

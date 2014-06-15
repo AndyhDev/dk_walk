@@ -16,6 +16,7 @@ import com.dk.walk.R;
 import com.dk.walk.database.SQLWay;
 import com.dk.walk.database.SQLiteDataSource;
 import com.dk.walk.service.GPSservice;
+import com.dk.walk.util.Helper;
 import com.dk.walk.util.ServiceFragment;
 
 public class StatisticOverviewFragment extends ServiceFragment {
@@ -27,6 +28,7 @@ public class StatisticOverviewFragment extends ServiceFragment {
 	private TextView totalWay;
 	private TextView totalSteps;
 	private TextView totalCal;
+	private TextView totalDuration;
 	
 	private DecimalFormat format = new DecimalFormat("0.00");
 	
@@ -38,6 +40,8 @@ public class StatisticOverviewFragment extends ServiceFragment {
 		totalWay = (TextView) layout.findViewById(R.id.total_way);
 		totalSteps = (TextView) layout.findViewById(R.id.total_steps);
 		totalCal = (TextView) layout.findViewById(R.id.total_cal);
+		totalDuration = (TextView) layout.findViewById(R.id.total_duration);
+		
 		refresh();
 		
 		return layout;
@@ -54,6 +58,7 @@ public class StatisticOverviewFragment extends ServiceFragment {
 		Float gWay = 0f;
 		Integer gSteps = 0;
 		Integer gCal = 0;
+		Integer gTime = 0;
 		
 		SQLWay way;
 		for(int i = 0; i < ways.size(); i++){
@@ -61,11 +66,13 @@ public class StatisticOverviewFragment extends ServiceFragment {
 			gWay += way.getWay();
 			gSteps += way.getSteps();
 			gCal += way.getCalories();
+			gTime += way.getTime();
 		}
 		
 		totalWay.setText(format.format(gWay) + " m");
 		totalSteps.setText(String.valueOf(gSteps));
 		totalCal.setText(String.valueOf(gCal));
+		totalDuration.setText(Helper.formatTime(gTime));
 	}
 	@Override
 	public void onNewLocation() {

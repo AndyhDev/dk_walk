@@ -9,7 +9,15 @@
     <string name="total_way">gesamt Weg:</string>
     <string name="total_cal">gesamt Kalorien:</string>
     <string name="total_steps">gesamt Schritte:</string>
+    <string name="total_duration">gesamt Dauer:</string>
     <string name="average_speed">Durchschnittsgeschwindigkeit:</string>
 	<string name="start">Los gehts!</string>
+	<string name="last_way">dein letzter Weg:</string>
+	<string name="way">Weg:</string>
+	<string name="steps">Schritte:</string>
+	<string name="calories">Kalorien:</string>
+	<string name="speed_short">Geschw.:</string>
+	<string name="speed">Geschwindigkeit:</string>
+	<string name="duration">Dauer:</string>
 	
 </resources>

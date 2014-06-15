@@ -13,20 +13,20 @@ public class SQLiteDataSource {
 	private SQLiteHelper dbHelper;
 	@SuppressWarnings("unused")
 	private Context ctx;
-	
+
 	public String[] allWayColumns = { SQLiteHelper.COLUMN_ID,
-		      SQLiteHelper.COLUMN_TITLE,
-		      SQLiteHelper.COLUMN_GPS,
-		      SQLiteHelper.COLUMN_WAY,
-		      SQLiteHelper.COLUMN_TIME,
-		      SQLiteHelper.COLUMN_DATE,
-		      SQLiteHelper.COLUMN_STEPS,
-		      SQLiteHelper.COLUMN_CALORIES,
-		      SQLiteHelper.COLUMN_DAY,
-		      SQLiteHelper.COLUMN_WEEK,
-		      SQLiteHelper.COLUMN_MONTH,
-		      SQLiteHelper.COLUMN_YEAR};
-	
+			SQLiteHelper.COLUMN_TITLE,
+			SQLiteHelper.COLUMN_GPS,
+			SQLiteHelper.COLUMN_WAY,
+			SQLiteHelper.COLUMN_TIME,
+			SQLiteHelper.COLUMN_DATE,
+			SQLiteHelper.COLUMN_STEPS,
+			SQLiteHelper.COLUMN_CALORIES,
+			SQLiteHelper.COLUMN_DAY,
+			SQLiteHelper.COLUMN_WEEK,
+			SQLiteHelper.COLUMN_MONTH,
+			SQLiteHelper.COLUMN_YEAR};
+
 	public SQLiteDataSource(Context context){
 		ctx = context;
 		dbHelper = new SQLiteHelper(context);
@@ -54,10 +54,10 @@ public class SQLiteDataSource {
 	public void deleteSQLWay(SQLWay way){
 		way.SQLDelete(database);
 	}
-	
+
 	public SQLWay getSQLWaybyId(long id){
 		SQLWay way = null;
-		
+
 		Cursor cursor = database.query(SQLiteHelper.TABLE_WAY, allWayColumns, null, null, null, null, null);
 		cursor.moveToFirst();
 		if(cursor.getCount() == 1){
@@ -67,7 +67,7 @@ public class SQLiteDataSource {
 
 		return way;
 	}
-	
+
 	public List<SQLWay> getAllSQLWays(){
 		List<SQLWay> ways = new ArrayList<SQLWay>();
 
@@ -83,5 +83,17 @@ public class SQLiteDataSource {
 
 		return ways;
 	}
-	
+
+	public SQLWay getLastWay(){
+		Cursor cursor = database.query(SQLiteHelper.TABLE_WAY, allWayColumns, null, null, null, null, SQLiteHelper.COLUMN_DATE);
+		if(cursor.getCount() > 0){
+			cursor.moveToLast();
+			SQLWay way = new SQLWay(cursor);
+			cursor.close();
+			
+			return way;
+		}
+		return null;
+	}
+
 }
