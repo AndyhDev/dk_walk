@@ -1,6 +1,10 @@
 package com.dk.walk.database;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -49,6 +53,35 @@ public class SQLiteDataSource {
 	}
 	public void deleteSQLWay(SQLWay way){
 		way.SQLDelete(database);
+	}
+	
+	public SQLWay getSQLWaybyId(long id){
+		SQLWay way = null;
+		
+		Cursor cursor = database.query(SQLiteHelper.TABLE_WAY, allWayColumns, null, null, null, null, null);
+		cursor.moveToFirst();
+		if(cursor.getCount() == 1){
+			way = new SQLWay(cursor);
+		}
+		cursor.close();
+
+		return way;
+	}
+	
+	public List<SQLWay> getAllSQLWays(){
+		List<SQLWay> ways = new ArrayList<SQLWay>();
+
+		Cursor cursor = database.query(SQLiteHelper.TABLE_WAY, allWayColumns, null, null, null, null, SQLiteHelper.COLUMN_DATE);
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			SQLWay way = new SQLWay(cursor);
+			ways.add(way);
+			cursor.moveToNext();
+		}
+		cursor.close();
+
+		return ways;
 	}
 	
 }

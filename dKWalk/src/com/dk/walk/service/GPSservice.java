@@ -33,7 +33,8 @@ public class GPSservice extends Service implements StepListener {
 
 	public final static String NEW_LOCATION = "new_locataion";
 	public final static String NEW_STEPS = "new_steps";
-
+	public final static String NEW_WAY = "new_way";
+	
 	private SQLWay currentWay;
 	private Boolean active = false;
 	private int GPSState = GPS_STATE_STOP;
@@ -118,6 +119,9 @@ public class GPSservice extends Service implements StepListener {
 
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,0, Loclist);
 		showNotify();
+		
+		Intent action = new Intent(NEW_WAY);
+		sendBroadcast(action);
 	}
 	public void pauseGPS(){
 		stepDetector.stop();
