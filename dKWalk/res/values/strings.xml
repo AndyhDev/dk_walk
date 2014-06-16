@@ -29,5 +29,9 @@
     <string name="change_title">Titel ändern</string>
     <string name="OK">OK</string>
     <string name="cancel">abbrechen</string>
+    <string name="delete">löschen</string>
+    <string name="view">ansehen</string>
+    <string name="title_activity_show_way">Way</string>
+    <string name="total_ways">gelaufene Strecken:</string>
 
 </resources>

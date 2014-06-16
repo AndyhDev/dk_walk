@@ -6,10 +6,9 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -17,7 +16,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.preference.PreferenceManager;
 import android.util.Log;
-
 import com.dk.walk.App;
 import com.dk.walk.R;
 
@@ -41,6 +39,7 @@ public class SQLWay {
 	private SharedPreferences prefs;
 	
 	private DecimalFormat format = new DecimalFormat("0.00");
+	@SuppressLint("SimpleDateFormat")
 	private DateFormat formatter = new SimpleDateFormat();
 	
 	public SQLWay(){

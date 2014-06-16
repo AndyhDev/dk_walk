@@ -48,6 +48,10 @@
             android:name="com.dk.walk.OverviewActivity"
             android:label="@string/title_activity_overview" >
         </activity>
+        <activity
+            android:name="com.dk.walk.ShowWayActivity"
+            android:label="@string/title_activity_show_way" >
+        </activity>
     </application>
 
 </manifest>

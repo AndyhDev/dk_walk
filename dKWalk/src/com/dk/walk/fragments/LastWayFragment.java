@@ -1,11 +1,5 @@
 package com.dk.walk.fragments;
 
-import java.util.List;
-
-import com.dk.walk.R;
-import com.dk.walk.database.SQLWay;
-import com.dk.walk.database.SQLiteDataSource;
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,10 +8,16 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dk.walk.R;
+import com.dk.walk.database.SQLWay;
+import com.dk.walk.database.SQLiteDataSource;
+
 public class LastWayFragment extends Fragment{
+@SuppressWarnings("unused")
 private static final String TAG = "LastWayFragment";
 	
 	private RelativeLayout layout;
+	private TextView title;
 	private TextView way;
 	private TextView steps;
 	private TextView cal;
@@ -28,6 +28,7 @@ private static final String TAG = "LastWayFragment";
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		layout = (RelativeLayout) inflater.inflate(R.layout.last_way, container, false);
 		
+		title = (TextView) layout.findViewById(R.id.title);
 		way = (TextView) layout.findViewById(R.id.way);
 		steps = (TextView) layout.findViewById(R.id.steps);
 		cal = (TextView) layout.findViewById(R.id.cal);
@@ -42,6 +43,7 @@ private static final String TAG = "LastWayFragment";
 		SQLWay way = datasource.getLastWay();
 		datasource.close();
 		if(way != null){
+			title.setText(way.getTitle());
 			this.way.setText(way.getFormatedWay());
 			steps.setText(way.getSteps().toString());
 			cal.setText(way.getCalories().toString());

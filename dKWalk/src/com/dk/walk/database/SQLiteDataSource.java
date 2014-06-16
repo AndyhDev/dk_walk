@@ -58,7 +58,7 @@ public class SQLiteDataSource {
 	public SQLWay getSQLWaybyId(long id){
 		SQLWay way = null;
 
-		Cursor cursor = database.query(SQLiteHelper.TABLE_WAY, allWayColumns, null, null, null, null, null);
+		Cursor cursor = database.query(SQLiteHelper.TABLE_WAY, allWayColumns, SQLiteHelper.COLUMN_ID + " LIKE ?" ,new String[]{id + "%"}, null, null, null);
 		cursor.moveToFirst();
 		if(cursor.getCount() == 1){
 			way = new SQLWay(cursor);

@@ -5,90 +5,119 @@
     android:background="@color/blue1"
     android:padding="10dp" >
 
-    <TextView
-        android:id="@+id/total_way"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@+id/textView1"
-        android:text=""
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="20sp" />
+        android:paddingRight="20dp"
+        android:layout_centerHorizontal="true" >
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/total_way"
-        android:layout_marginTop="17dp"
-        android:text="@string/total_steps"
-        android:textColor="@color/white"
-        android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/total_way"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/textView1"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/total_way"
-        android:layout_marginLeft="51dp"
-        android:text="@string/total_way"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/textView1"
+            android:layout_below="@+id/total_way"
+            android:layout_marginTop="17dp"
+            android:text="@string/total_steps"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/total_steps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/total_way"
-        android:layout_alignTop="@+id/textView2"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/total_way"
+            android:layout_marginLeft="51dp"
+            android:text="@string/total_way"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/total_cal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/total_steps"
-        android:layout_alignTop="@+id/textView3"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/total_steps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/total_way"
+            android:layout_alignTop="@+id/textView2"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/total_steps"
-        android:layout_marginTop="17dp"
-        android:text="@string/total_cal"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-    
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_below="@+id/total_cal"
-        android:layout_marginTop="17dp"
-        android:text="@string/total_duration"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
-    
-    <TextView
-        android:id="@+id/total_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/total_steps"
-        android:layout_alignTop="@+id/textView4"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/total_cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/total_steps"
+            android:layout_alignTop="@+id/textView3"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_below="@+id/total_steps"
+            android:layout_marginTop="17dp"
+            android:text="@string/total_cal"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_below="@+id/total_cal"
+            android:layout_marginTop="17dp"
+            android:text="@string/total_duration"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/total_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/total_steps"
+            android:layout_alignTop="@+id/textView4"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_below="@+id/total_duration"
+            android:layout_marginTop="17dp"
+            android:gravity="right"
+            android:text="@string/total_ways"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/total_ways"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/total_steps"
+            android:layout_alignTop="@+id/textView5"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 </RelativeLayout>

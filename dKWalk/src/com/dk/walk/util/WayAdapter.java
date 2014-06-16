@@ -21,7 +21,6 @@ public class WayAdapter extends BaseAdapter {
 	private LayoutInflater songInf;
 	private static Context context;
 	private String wayText;
-	private Integer expandedIndex;
 	
 	final int INVALID_ID = -1;
 	

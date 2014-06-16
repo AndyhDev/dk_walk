@@ -29,6 +29,7 @@ public class StatisticOverviewFragment extends ServiceFragment {
 	private TextView totalSteps;
 	private TextView totalCal;
 	private TextView totalDuration;
+	private TextView totalWays;
 	
 	private DecimalFormat format = new DecimalFormat("0.00");
 	
@@ -41,6 +42,7 @@ public class StatisticOverviewFragment extends ServiceFragment {
 		totalSteps = (TextView) layout.findViewById(R.id.total_steps);
 		totalCal = (TextView) layout.findViewById(R.id.total_cal);
 		totalDuration = (TextView) layout.findViewById(R.id.total_duration);
+		totalWays = (TextView) layout.findViewById(R.id.total_ways);
 		
 		refresh();
 		
@@ -73,6 +75,7 @@ public class StatisticOverviewFragment extends ServiceFragment {
 		totalSteps.setText(String.valueOf(gSteps));
 		totalCal.setText(String.valueOf(gCal));
 		totalDuration.setText(Helper.formatTime(gTime));
+		totalWays.setText(String.valueOf(ways.size()));
 	}
 	@Override
 	public void onNewLocation() {
@@ -94,14 +97,14 @@ public class StatisticOverviewFragment extends ServiceFragment {
 	
 	@Override
 	public void onServiceDisconnected() {
-		service = getService();
-		refresh();
+		service = null;
 		
 	}
 	
 	@Override
 	public void onServiceConnected() {
-		service = null;
+		service = getService();
+		refresh();
 	}
 
 	@Override

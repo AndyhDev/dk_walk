@@ -241,6 +241,7 @@ public class GPSservice extends Service implements StepListener {
 
 	public void setTitle(String value) {
 		if(currentWay != null){
+			tempTitle = null;
 			currentWay.setTitle(value);
 			SQLiteDataSource dataSource = new SQLiteDataSource(this);
 			dataSource.open();
