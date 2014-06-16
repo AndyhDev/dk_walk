@@ -1,11 +1,5 @@
 package com.dk.walk.fragments;
 
-import com.dk.walk.R;
-import com.dk.walk.StartWayActivity;
-import com.dk.walk.service.GPSservice;
-import com.dk.walk.util.ServiceFragment;
-
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +9,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.dk.walk.R;
+import com.dk.walk.StartWayActivity;
+import com.dk.walk.service.GPSservice;
+import com.dk.walk.util.ServiceFragment;
 
 public class StartFragment extends ServiceFragment implements OnClickListener {
 	private static final String TAG = "StartFragment";

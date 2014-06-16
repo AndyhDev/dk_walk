@@ -20,8 +20,14 @@
     <string name="speed">Geschwindigkeit:</string>
     <string name="duration">Dauer:</string>
     <string name="title_activity_start_way">StartWayActivity</string>
-	<string name="start2">Start</string>
-	<string name="stop">Stop</string>
-	<string name="active_way">zum aktiven Walk wechseln</string>
-	
+    <string name="start2">Start</string>
+    <string name="stop">Stop</string>
+    <string name="active_way">zum aktiven Walk wechseln</string>
+    <string name="go_overview">zur Übersicht</string>
+    <string name="title_activity_overview">Übersicht</string>
+    <string name="no_title">gelaufen</string>
+    <string name="change_title">Titel ändern</string>
+    <string name="OK">OK</string>
+    <string name="cancel">abbrechen</string>
+
 </resources>

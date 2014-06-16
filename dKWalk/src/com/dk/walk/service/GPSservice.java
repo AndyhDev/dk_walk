@@ -1,13 +1,6 @@
 package com.dk.walk.service;
 
 
-import com.dk.walk.MainActivity;
-import com.dk.walk.R;
-import com.dk.walk.database.SQLWay;
-import com.dk.walk.database.SQLiteDataSource;
-import com.dk.walk.util.StepDetector;
-import com.dk.walk.util.StepListener;
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -21,6 +14,13 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+
+import com.dk.walk.MainActivity;
+import com.dk.walk.R;
+import com.dk.walk.database.SQLWay;
+import com.dk.walk.database.SQLiteDataSource;
+import com.dk.walk.util.StepDetector;
+import com.dk.walk.util.StepListener;
 
 public class GPSservice extends Service implements StepListener {
 	private final IBinder binder = new MyBinder();
@@ -47,7 +47,8 @@ public class GPSservice extends Service implements StepListener {
 	private Long time = (long) 0;
 	private StepDetector stepDetector;
 	private Handler handler = new Handler();
-
+	private String tempTitle;
+	
 	public void onCreate(){
 		lm =(LocationManager) getSystemService(LOCATION_SERVICE);
 		stepDetector = new StepDetector(this);
@@ -112,6 +113,11 @@ public class GPSservice extends Service implements StepListener {
 		dataSource.open();
 		currentWay = dataSource.getNewSQLWay();
 		dataSource.close();
+		
+		if(tempTitle != null){
+			currentWay.setTitle(tempTitle);
+			tempTitle = null;
+		}
 		active = true;
 		GPSState = GPS_STATE_START;
 		stepDetector.start();
@@ -231,5 +237,17 @@ public class GPSservice extends Service implements StepListener {
 	@Override
 	public void passValue() {
 
+	}
+
+	public void setTitle(String value) {
+		if(currentWay != null){
+			currentWay.setTitle(value);
+			SQLiteDataSource dataSource = new SQLiteDataSource(this);
+			dataSource.open();
+			dataSource.updateSQLWay(currentWay);
+			dataSource.close();
+		}else{
+			tempTitle = value;
+		}
 	}
 } 

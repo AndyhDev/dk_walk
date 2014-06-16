@@ -44,6 +44,10 @@
             android:name="com.dk.walk.StartWayActivity"
             android:label="@string/title_activity_start_way" >
         </activity>
+        <activity
+            android:name="com.dk.walk.OverviewActivity"
+            android:label="@string/title_activity_overview" >
+        </activity>
     </application>
 
 </manifest>

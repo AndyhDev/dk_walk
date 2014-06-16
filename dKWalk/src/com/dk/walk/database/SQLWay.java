@@ -1,6 +1,10 @@
 package com.dk.walk.database;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.json.JSONArray;
@@ -15,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.dk.walk.App;
+import com.dk.walk.R;
 
 public class SQLWay {
 	private static final String TAG = "SQLWay";
@@ -36,6 +41,7 @@ public class SQLWay {
 	private SharedPreferences prefs;
 	
 	private DecimalFormat format = new DecimalFormat("0.00");
+	private DateFormat formatter = new SimpleDateFormat();
 	
 	public SQLWay(){
 		title = "";
@@ -238,6 +244,9 @@ public class SQLWay {
 	}
 
 	public String getTitle() {
+		if(title.isEmpty()){
+			return App.getContextStatic().getString(R.string.no_title);
+		}
 		return title;
 	}
 
@@ -288,7 +297,13 @@ public class SQLWay {
 	public Long getDate() {
 		return date;
 	}
-
+	
+	public String getFormatedDate() {
+		Timestamp stamp = new Timestamp(date);
+		Date date = new Date(stamp.getTime());
+		return formatter.format(date);
+	}
+	
 	public void setDate(long date) {
 		this.date = date;
 	}

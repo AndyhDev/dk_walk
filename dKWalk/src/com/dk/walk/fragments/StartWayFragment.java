@@ -5,12 +5,21 @@ import com.dk.walk.database.SQLWay;
 import com.dk.walk.service.GPSservice;
 import com.dk.walk.util.ServiceFragment;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.text.Editable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,6 +32,8 @@ public class StartWayFragment extends ServiceFragment implements OnClickListener
 	private Button startBnt;
 	private Button stopBnt;
 	private ImageButton pauseBnt;
+	
+	private TextView title;
 	
 	private TextView way;
 	private TextView speed;
@@ -44,11 +55,16 @@ public class StartWayFragment extends ServiceFragment implements OnClickListener
 		stopBnt.setOnClickListener(this);
 		pauseBnt.setOnClickListener(this);
 		
+		title = (TextView) layout.findViewById(R.id.title);
+		title.setText(getString(R.string.no_title));
+		
 		way = (TextView) layout.findViewById(R.id.way);
 		speed = (TextView) layout.findViewById(R.id.speed);
 		steps = (TextView) layout.findViewById(R.id.steps);
 		cal = (TextView) layout.findViewById(R.id.calories);
 		duration = (TextView) layout.findViewById(R.id.duration);
+		
+		title.setOnClickListener(this);
 		
 		refresh();
 		
@@ -75,6 +91,7 @@ public class StartWayFragment extends ServiceFragment implements OnClickListener
 			}
 			SQLWay way = getService().getWay();
 			if(way != null){
+				title.setText(way.getTitle());
 				this.way.setText(way.getFormatedWay());
 				speed.setText(way.getFormatedSpeed());
 				steps.setText(way.getSteps().toString());
@@ -127,7 +144,42 @@ public class StartWayFragment extends ServiceFragment implements OnClickListener
 				getService().togglePauseState();
 				refresh();
 			}
+		}else if(id == R.id.title){
+			showTitleChangeDlg();
 		}
+	}
+	private void showTitleChangeDlg() {
+		final EditText input = new EditText(getActivity());
+		input.setText(title.getText());
+		input.requestFocus();
+		
+		
+		new AlertDialog.Builder(getActivity())
+	    .setTitle(R.string.change_title)
+	    .setView(input)
+	    .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int whichButton) {
+	            String value = input.getText().toString(); 
+	            if(getService() != null){
+	            	getService().setTitle(value);
+	            	title.setText(value);
+	            }
+	        }
+	    }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int whichButton) {
+	        }
+	    }).show();
+		
+		(new Handler()).postDelayed(new Runnable() {
+
+            public void run() {
+
+                input.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN , 0, 0, 0));
+                input.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP , 0, 0, 0));                       
+                input.setSelection(input.getText().length());
+            }
+        }, 200);
+		
 	}
 	@Override
 	public void onUpdateTime() {

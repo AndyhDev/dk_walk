@@ -7,8 +7,8 @@ import android.os.PowerManager.WakeLock;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dk.walk.fragments.GoOverviewFragment;
 import com.dk.walk.fragments.LastWayFragment;
-import com.dk.walk.fragments.MainFragment;
 import com.dk.walk.fragments.StartFragment;
 import com.dk.walk.fragments.StatisticOverviewFragment;
 
@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction().add(R.id.container1, new StartFragment()).commit();
 			getFragmentManager().beginTransaction().add(R.id.container2, new StatisticOverviewFragment()).commit();
+			getFragmentManager().beginTransaction().add(R.id.container4, new GoOverviewFragment()).commit();
 			getFragmentManager().beginTransaction().add(R.id.container3, new LastWayFragment()).commit();
 		}
 	}

@@ -24,6 +24,13 @@
         </FrameLayout>
         
         <FrameLayout
+            android:id="@+id/container4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg" >
+        </FrameLayout>
+        
+        <FrameLayout
             android:id="@+id/container3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
