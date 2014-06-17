@@ -24,6 +24,7 @@ public class StatisticOverviewFragment extends ServiceFragment {
 	
 	private RelativeLayout layout;
 	private Context context;
+	@SuppressWarnings("unused")
 	private GPSservice service;
 	private TextView totalWay;
 	private TextView totalSteps;

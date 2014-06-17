@@ -48,13 +48,14 @@ public class StepDetector implements SensorEventListener
 
 	private ArrayList<StepListener> mStepListeners = new ArrayList<StepListener>();
 
+	@SuppressWarnings("unused")
 	private Context ctx;
 	private SensorManager sensorManager;
 	private Sensor sensor;
 
 	public StepDetector(Context context) {
 		ctx = context;
-		sensorManager = (SensorManager) context.getSystemService(context.SENSOR_SERVICE);
+		sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
 
 		int h = 480; // TODO: remove this constant
 		mYOffset = h * 0.5f;
@@ -84,6 +85,7 @@ public class StepDetector implements SensorEventListener
 	}
 
 	//public void onSensorChanged(int sensor, float[] values) {
+	@SuppressWarnings("deprecation")
 	public void onSensorChanged(SensorEvent event) {
 		Sensor sensor = event.sensor; 
 		synchronized (this) {

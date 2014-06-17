@@ -44,6 +44,7 @@ public class GPSservice extends Service implements StepListener {
 	private Double currentLat;
 	private Double lastLon = null;
 	private Double lastLat = null;
+	@SuppressWarnings("unused")
 	private Long time = (long) 0;
 	private StepDetector stepDetector;
 	private Handler handler = new Handler();

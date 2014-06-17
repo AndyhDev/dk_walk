@@ -15,7 +15,6 @@ import com.dk.walk.database.SQLWay;
 import com.dk.walk.database.SQLiteDataSource;
 
 public class ShowWayFragment extends Fragment{
-	@SuppressWarnings("unused")
 	private static final String TAG = "ShowWayFragment";
 	
 	public static final String ACTION_SHOW_WAY = "action_show_way";

@@ -1,28 +1,25 @@
 package com.dk.walk.fragments;
 
-import com.dk.walk.R;
-import com.dk.walk.database.SQLWay;
-import com.dk.walk.service.GPSservice;
-import com.dk.walk.util.ServiceFragment;
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.dk.walk.R;
+import com.dk.walk.database.SQLWay;
+import com.dk.walk.service.GPSservice;
+import com.dk.walk.util.ServiceFragment;
 
 public class StartWayFragment extends ServiceFragment implements OnClickListener{
 	@SuppressWarnings("unused")
@@ -148,6 +145,7 @@ public class StartWayFragment extends ServiceFragment implements OnClickListener
 			showTitleChangeDlg();
 		}
 	}
+	@SuppressLint("Recycle")
 	private void showTitleChangeDlg() {
 		final EditText input = new EditText(getActivity());
 		input.setText(title.getText());
