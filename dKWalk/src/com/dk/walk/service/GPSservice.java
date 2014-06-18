@@ -64,6 +64,10 @@ public class GPSservice extends Service implements StepListener {
 				if(lastLon == null){
 					lastLat = loc.getLatitude();
 					lastLon = loc.getLongitude();
+					currentWay.addWay(0);
+					currentWay.addLocation(loc);
+					Intent action = new Intent(NEW_LOCATION);
+					sendBroadcast(action);
 				}else{
 					currentLat = loc.getLatitude();
 					currentLon = loc.getLongitude();

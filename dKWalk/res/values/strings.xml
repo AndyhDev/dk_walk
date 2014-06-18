@@ -21,6 +21,7 @@
     <string name="duration">Dauer:</string>
     <string name="title_activity_start_way">StartWayActivity</string>
     <string name="start2">Start</string>
+    <string name="end">Ende</string>
     <string name="stop">Stop</string>
     <string name="active_way">zum aktiven Walk wechseln</string>
     <string name="go_overview">zur Übersicht</string>
@@ -33,5 +34,6 @@
     <string name="view">ansehen</string>
     <string name="title_activity_show_way">Way</string>
     <string name="total_ways">gelaufene Strecken:</string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>

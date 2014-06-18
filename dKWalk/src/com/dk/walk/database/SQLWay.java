@@ -6,8 +6,10 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
@@ -16,12 +18,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
 import com.dk.walk.App;
 import com.dk.walk.R;
+import com.google.android.gms.maps.model.LatLng;
 
 public class SQLWay {
 	private static final String TAG = "SQLWay";
-	
+
 	private Long id;
 	private String title;
 	private JSONArray gps;
@@ -34,14 +38,14 @@ public class SQLWay {
 	private Integer week;
 	private Integer month;
 	private Integer year;
-	
+
 	private Double speed;
 	private SharedPreferences prefs;
-	
+
 	private DecimalFormat format = new DecimalFormat("0.00");
 	@SuppressLint("SimpleDateFormat")
 	private DateFormat formatter = new SimpleDateFormat();
-	
+
 	public SQLWay(){
 		title = "";
 		gps = new JSONArray();
@@ -50,17 +54,17 @@ public class SQLWay {
 		date = System.currentTimeMillis();		
 		steps = 0;
 		calories = 0;
-		
+
 		Calendar now = Calendar.getInstance();
-		
+
 		day = now.get(Calendar.DAY_OF_MONTH);
 		week = now.get(Calendar.WEEK_OF_YEAR);
 		month = now.get(Calendar.MONTH);
 		year = now.get(Calendar.YEAR);
-		
+
 		prefs = PreferenceManager.getDefaultSharedPreferences(App.getContextStatic());
 	}
-	
+
 	public SQLWay(SQLWay way){
 		this.id = way.getId();
 		this.title = way.getTitle();
@@ -74,7 +78,7 @@ public class SQLWay {
 		this.week = way.getWeek();
 		this.month = way.getMonth();
 		this.year = way.getYear();
-		
+
 		prefs = PreferenceManager.getDefaultSharedPreferences(App.getContextStatic());
 	}
 	public SQLWay(String title, JSONArray gps, float way, int time, long date, int steps, int calories, int day, int week, int month, int year){
@@ -89,10 +93,10 @@ public class SQLWay {
 		this.week = week;
 		this.month = month;
 		this.year = year;
-		
+
 		prefs = PreferenceManager.getDefaultSharedPreferences(App.getContextStatic());
 	}
-	
+
 	public SQLWay(Cursor cursor){
 		try{
 			this.id = cursor.getLong(0);
@@ -107,11 +111,11 @@ public class SQLWay {
 			this.week = cursor.getInt(9);
 			this.month = cursor.getInt(10);
 			this.year = cursor.getInt(11);
-			
+
 		}catch (JSONException e){
 			e.printStackTrace();
 		}
-		
+
 		prefs = PreferenceManager.getDefaultSharedPreferences(App.getContextStatic());
 	}
 	public long SQLInsert(SQLiteDatabase database){
@@ -129,7 +133,7 @@ public class SQLWay {
 		values.put(SQLiteHelper.COLUMN_YEAR, year);
 		long insertId = database.insert(SQLiteHelper.TABLE_WAY, null, values);
 		id = insertId;
-		
+
 		return insertId;
 	}
 	public void SQLDelete(SQLiteDatabase database){
@@ -150,7 +154,7 @@ public class SQLWay {
 		values.put(SQLiteHelper.COLUMN_YEAR, year);
 		database.update(SQLiteHelper.TABLE_WAY, values, SQLiteHelper.COLUMN_ID + "=" + id, null);
 	}
-	
+
 	public void addWay(float diff){
 		way += diff;
 	}
@@ -171,7 +175,7 @@ public class SQLWay {
 		actSpeed();
 		return speed;
 	}
-	
+
 	public String getFormatedSpeed(){
 		actSpeed();
 		return format.format(speed) + " km/h";
@@ -201,7 +205,7 @@ public class SQLWay {
 			}
 			Log.d(TAG, "4");
 			cor = ((cor / 3600000) * time);
-			
+
 			//calories = (int) (cor * weight); TODO
 			double km = way / 1000f;
 			calories = (int) (km * weight);
@@ -221,7 +225,7 @@ public class SQLWay {
 			e.printStackTrace();
 		}
 		return point.toString();
-		
+
 	}
 	public Location stringToLocation(String string){
 		Location loc = new Location("point");
@@ -233,6 +237,36 @@ public class SQLWay {
 			e.printStackTrace();
 		}
 		return loc;
+	}
+	public LatLng stringToLatLng(String string){
+		try {
+			JSONArray point = new JSONArray(string);
+			return new LatLng(point.getDouble(1), point.getDouble(0));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Location getLastLocation() {
+		String point;
+		try {
+			point = gps.getString(gps.length()-1);
+			if(point != null){
+				return stringToLocation(point);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	public LatLng getLastLatLng(){
+		Location loc = getLastLocation();
+		if(loc != null){
+			return new LatLng(loc.getLatitude(), loc.getLongitude());
+		}
+		return null;
 	}
 	public long getId() {
 		return id;
@@ -260,22 +294,22 @@ public class SQLWay {
 	public void setGps(JSONArray gps) {
 		this.gps = gps;
 	}
-	
+
 	public Float getWay() {
 		return way;
 	}
-	
+
 	public String getFormatedWay(){
 		return format.format(way) + " m";
 	}
 	public void setWay(Float way) {
 		this.way = way;
 	}
-	
+
 	public Integer getTime() {
 		return time;
 	}
-	
+
 	public String getFormatedTime(){
 		Integer sec = time / 1000;
 		if(sec < 60){
@@ -292,17 +326,17 @@ public class SQLWay {
 	public void setTime(Integer time) {
 		this.time = time;
 	}
-	
+
 	public Long getDate() {
 		return date;
 	}
-	
+
 	public String getFormatedDate() {
 		Timestamp stamp = new Timestamp(date);
 		Date date = new Date(stamp.getTime());
 		return formatter.format(date);
 	}
-	
+
 	public void setDate(long date) {
 		this.date = date;
 	}
@@ -355,5 +389,5 @@ public class SQLWay {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-	
+
 }

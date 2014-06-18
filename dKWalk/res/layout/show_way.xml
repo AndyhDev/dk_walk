@@ -141,4 +141,15 @@
         android:textColor="@color/white"
         android:textStyle="bold" />
 
+    <ImageButton
+        android:id="@+id/route"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/layout"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@null"
+        android:src="@drawable/route" />
+
 </RelativeLayout>

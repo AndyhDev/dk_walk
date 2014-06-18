@@ -57,6 +57,7 @@
                     android:typeface="normal" />
 
                 <RelativeLayout
+                    android:id="@+id/center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/title"
@@ -97,11 +98,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/textView2"
+                        android:layout_marginTop="17dp"
                         android:layout_toLeftOf="@+id/speed"
                         android:text="@string/steps"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/white"
-                        android:layout_marginTop="17dp"
                         android:textSize="22sp" />
 
                     <TextView
@@ -123,11 +124,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/textView3"
+                        android:layout_marginTop="17dp"
                         android:layout_toLeftOf="@+id/steps"
                         android:text="@string/calories"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/white"
-                        android:layout_marginTop="17dp"
                         android:textSize="22sp" />
 
                     <TextView
@@ -150,10 +151,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_below="@+id/textView1"
+                        android:layout_marginTop="17dp"
                         android:text="@string/speed_short"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/white"
-                        android:layout_marginTop="17dp"
                         android:textSize="22sp" />
 
                     <TextView
@@ -165,19 +166,19 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/white"
                         android:textSize="22sp" />
-                    
+
                     <TextView
                         android:id="@+id/textView5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/textView4"
+                        android:layout_marginTop="17dp"
                         android:layout_toLeftOf="@+id/steps"
                         android:text="@string/duration"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textColor="@color/white"
-                        android:layout_marginTop="17dp"
                         android:textSize="22sp" />
-                    
+
                     <TextView
                         android:id="@+id/duration"
                         android:layout_width="wrap_content"
@@ -191,20 +192,30 @@
                         android:textColor="@color/white"
                         android:textSize="22sp"
                         android:textStyle="bold" />
-                    
                 </RelativeLayout>
 
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/digitalClock1"
+                    android:layout_below="@+id/route"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="15dp"
                     android:text=""
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/route"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true"
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/route" />
 
             </RelativeLayout>
         </LinearLayout>

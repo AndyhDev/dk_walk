@@ -6,15 +6,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dk.walk.MapActivity;
 import com.dk.walk.R;
 import com.dk.walk.database.SQLWay;
 import com.dk.walk.database.SQLiteDataSource;
 
-public class ShowWayFragment extends Fragment{
+public class ShowWayFragment extends Fragment implements OnClickListener{
 	private static final String TAG = "ShowWayFragment";
 	
 	public static final String ACTION_SHOW_WAY = "action_show_way";
@@ -29,6 +32,8 @@ public class ShowWayFragment extends Fragment{
 	private TextView cal;
 	private TextView speed;
 	private TextView duration;
+	
+	private ImageButton routeBnt;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -40,7 +45,10 @@ public class ShowWayFragment extends Fragment{
 		cal = (TextView) layout.findViewById(R.id.cal);
 		speed = (TextView) layout.findViewById(R.id.speed);
 		duration = (TextView) layout.findViewById(R.id.duration);
-
+		
+		routeBnt = (ImageButton) layout.findViewById(R.id.route);
+		routeBnt.setOnClickListener(this);
+		
 		Intent intent = getActivity().getIntent();
 		Log.d(TAG, "1");
 		if(intent != null){
@@ -81,5 +89,18 @@ public class ShowWayFragment extends Fragment{
 	public void onResume(){
 		super.onResume();
 		refresh();
+	}
+
+	@Override
+	public void onClick(View v) {
+		int id = v.getId();
+		
+		if(id == R.id.route){
+			Intent activity = new Intent(getActivity(), MapActivity.class);
+			activity.setAction(MapsFragment.ACTION);
+			activity.putExtra(MapsFragment.TYPE, MapsFragment.TYPE_WAY);
+			activity.putExtra(MapsFragment.WAY_ID, WAY_ID);
+			startActivity(activity);
+		}
 	}
 }

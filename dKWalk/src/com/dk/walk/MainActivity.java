@@ -15,6 +15,7 @@ import com.dk.walk.fragments.StatisticOverviewFragment;
 public class MainActivity extends Activity {
 	WakeLock mWakeLock;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,6 +27,7 @@ public class MainActivity extends Activity {
 			getFragmentManager().beginTransaction().add(R.id.container4, new GoOverviewFragment()).commit();
 			getFragmentManager().beginTransaction().add(R.id.container3, new LastWayFragment()).commit();
 		}
+
 	}
 
 	@Override

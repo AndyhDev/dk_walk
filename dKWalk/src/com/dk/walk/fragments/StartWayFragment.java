@@ -3,6 +3,7 @@ package com.dk.walk.fragments;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -16,6 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.dk.walk.MapActivity;
 import com.dk.walk.R;
 import com.dk.walk.database.SQLWay;
 import com.dk.walk.service.GPSservice;
@@ -29,6 +32,7 @@ public class StartWayFragment extends ServiceFragment implements OnClickListener
 	private Button startBnt;
 	private Button stopBnt;
 	private ImageButton pauseBnt;
+	private ImageButton routeBnt;
 	
 	private TextView title;
 	
@@ -47,6 +51,9 @@ public class StartWayFragment extends ServiceFragment implements OnClickListener
 		stopBnt.setEnabled(false);
 		pauseBnt = (ImageButton) layout.findViewById(R.id.pause);
 		pauseBnt.setEnabled(false);
+		
+		routeBnt = (ImageButton) layout.findViewById(R.id.route);
+		routeBnt.setOnClickListener(this);
 		
 		startBnt.setOnClickListener(this);
 		stopBnt.setOnClickListener(this);
@@ -143,6 +150,11 @@ public class StartWayFragment extends ServiceFragment implements OnClickListener
 			}
 		}else if(id == R.id.title){
 			showTitleChangeDlg();
+		}else if(id == R.id.route){
+			Intent activity = new Intent(getActivity(), MapActivity.class);
+			activity.setAction(MapsFragment.ACTION);
+			activity.putExtra(MapsFragment.TYPE, MapsFragment.TYPE_CURRENT);
+			startActivity(activity);
 		}
 	}
 	@SuppressLint("Recycle")
