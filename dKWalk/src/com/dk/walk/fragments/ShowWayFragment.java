@@ -19,10 +19,10 @@ import com.dk.walk.database.SQLiteDataSource;
 
 public class ShowWayFragment extends Fragment implements OnClickListener{
 	private static final String TAG = "ShowWayFragment";
-	
+
 	public static final String ACTION_SHOW_WAY = "action_show_way";
 	public static final String WAY_ID = "way_id";
-	
+
 	private SQLWay currentWay;
 
 	private RelativeLayout layout;
@@ -32,23 +32,23 @@ public class ShowWayFragment extends Fragment implements OnClickListener{
 	private TextView cal;
 	private TextView speed;
 	private TextView duration;
-	
+
 	private ImageButton routeBnt;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		layout = (RelativeLayout) inflater.inflate(R.layout.show_way, container, false);
-		
+
 		title = (TextView) layout.findViewById(R.id.title);
 		way = (TextView) layout.findViewById(R.id.way);
 		steps = (TextView) layout.findViewById(R.id.steps);
 		cal = (TextView) layout.findViewById(R.id.cal);
 		speed = (TextView) layout.findViewById(R.id.speed);
 		duration = (TextView) layout.findViewById(R.id.duration);
-		
+
 		routeBnt = (ImageButton) layout.findViewById(R.id.route);
 		routeBnt.setOnClickListener(this);
-		
+
 		Intent intent = getActivity().getIntent();
 		Log.d(TAG, "1");
 		if(intent != null){
@@ -94,12 +94,14 @@ public class ShowWayFragment extends Fragment implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
-		
+
 		if(id == R.id.route){
 			Intent activity = new Intent(getActivity(), MapActivity.class);
 			activity.setAction(MapsFragment.ACTION);
 			activity.putExtra(MapsFragment.TYPE, MapsFragment.TYPE_WAY);
-			activity.putExtra(MapsFragment.WAY_ID, WAY_ID);
+			if(currentWay != null){
+				activity.putExtra(MapsFragment.WAY_ID, currentWay.getId());
+			}
 			startActivity(activity);
 		}
 	}

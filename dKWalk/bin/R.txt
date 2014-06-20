@@ -234,6 +234,7 @@ int string common_google_play_services_update_text 0x7f050013
 int string common_google_play_services_update_title 0x7f050012
 int string common_signin_button_text 0x7f05001d
 int string common_signin_button_text_long 0x7f05001e
+int string create_map 0x7f050042
 int string delete 0x7f05003d
 int string duration 0x7f050031
 int string end 0x7f050034

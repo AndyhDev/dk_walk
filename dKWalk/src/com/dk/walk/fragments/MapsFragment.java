@@ -1,17 +1,19 @@
 package com.dk.walk.fragments;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.dk.walk.R;
 import com.dk.walk.database.SQLWay;
@@ -21,9 +23,7 @@ import com.dk.walk.util.ServiceFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -43,6 +43,7 @@ public class MapsFragment extends ServiceFragment{
 	private Long wayId;
 
 	private LatLng lastPoint;
+	private PolylineOptions line;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -83,22 +84,50 @@ public class MapsFragment extends ServiceFragment{
 			}
 		}
 	}
-	private void loadWay(SQLWay way){
-		if(way != null){
-			JSONArray gps = way.getGps();
-			for(int i = 0; i < gps.length(); i++){
-				try {
-					LatLng point = way.stringToLatLng(gps.getString(i));
-					addPoint(point);
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}	
+	private void loadWay(final SQLWay way){
+		final ProgressDialog dialog = ProgressDialog.show(getActivity(), "",  getString(R.string.create_map), true);
+		
+		new Thread(new Runnable() {
+			public void run() {
+				Log.d(TAG, "1");
+				if(way != null){
+					JSONArray gps = way.getGps();
+					final List<LatLng> points = new ArrayList<LatLng>();
+					for(int i = 0; i < gps.length(); i++){
+						try {
+							LatLng point = way.stringToLatLng(gps.getString(i));
+							points.add(point);
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}	
+					}
+					if(points.size() != 0){
+						line = new PolylineOptions();
+						line.color(0x709F81F7);
+						line.geodesic(true);
+						line.width(20);
+						line.addAll(points);
+						line.visible(true);
+						getActivity().runOnUiThread(new Runnable() {
+							public void run() {
+								map.clear();
+								map.addPolyline(line);
+
+								map.moveCamera(CameraUpdateFactory.newLatLngZoom(points.get(points.size()-1), 15));
+								dialog.dismiss();
+							}
+						});
+					}
+				}
 			}
-		}
+		}).start();
+
 	}
 	@Override
 	public void onServiceConnected() {
-		refresh();
+		if(mode == TYPE_CURRENT){
+			refresh();
+		}
 	}
 
 	@Override
@@ -134,14 +163,24 @@ public class MapsFragment extends ServiceFragment{
 				map.addMarker(new MarkerOptions()
 				.position(loc)
 				.title(getString(R.string.start2)));
-			}else{
-				Log.d(TAG, "addPoint(2)");
-				PolylineOptions line = new PolylineOptions()
-						.add(lastPoint, loc)
-						.color(0x709F81F7)
-						.geodesic(true);
-				map.addPolyline(line);
 			}
+			List<LatLng> points;
+			if(line != null){
+				points = line.getPoints();
+			}else{
+				points = new ArrayList<LatLng>();
+			}
+
+			points.add(loc);
+			line = new PolylineOptions();
+			line.color(0x709F81F7);
+			line.geodesic(true);
+			line.width(20);
+			line.addAll(points);
+			line.visible(true);
+			map.clear();
+			map.addPolyline(line);
+
 			map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15));
 			lastPoint = loc;
 		}
