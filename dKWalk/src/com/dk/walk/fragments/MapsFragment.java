@@ -36,6 +36,8 @@ public class MapsFragment extends ServiceFragment{
 	public static final int TYPE_WAY = 1;
 	public static final String WAY_ID = "way_id";
 
+	private static final String KEY_ZOOM_LEVEL = "zoom_level";
+
 	private RelativeLayout layout;
 	private GoogleMap map;
 
@@ -44,12 +46,18 @@ public class MapsFragment extends ServiceFragment{
 
 	private LatLng lastPoint;
 	private PolylineOptions line;
-
+	private Float zoomLevel = 15f;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		layout = (RelativeLayout) inflater.inflate(R.layout.fragment_map, container, false);
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-
+		
+		if(savedInstanceState != null){
+			if(savedInstanceState.containsKey(KEY_ZOOM_LEVEL)){
+				zoomLevel = savedInstanceState.getFloat(KEY_ZOOM_LEVEL);
+			}
+		}
 		Intent intent = getActivity().getIntent();
 		String action = intent.getAction();
 		if(action != null){
@@ -113,7 +121,7 @@ public class MapsFragment extends ServiceFragment{
 								map.clear();
 								map.addPolyline(line);
 
-								map.moveCamera(CameraUpdateFactory.newLatLngZoom(points.get(points.size()-1), 15));
+								map.moveCamera(CameraUpdateFactory.newLatLngZoom(points.get(points.size()-1), zoomLevel));
 								dialog.dismiss();
 							}
 						});
@@ -181,7 +189,7 @@ public class MapsFragment extends ServiceFragment{
 			map.clear();
 			map.addPolyline(line);
 
-			map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15));
+			map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, zoomLevel));
 			lastPoint = loc;
 		}
 
@@ -204,5 +212,9 @@ public class MapsFragment extends ServiceFragment{
 		// TODO Auto-generated method stub
 
 	}
-
+	@Override 
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		savedInstanceState.putFloat(KEY_ZOOM_LEVEL, map.getCameraPosition().zoom);
+		super.onSaveInstanceState(savedInstanceState);
+	}
 }
