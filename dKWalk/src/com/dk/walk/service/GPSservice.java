@@ -126,7 +126,8 @@ public class GPSservice extends Service implements StepListener {
 		active = true;
 		GPSState = GPS_STATE_START;
 		stepDetector.start();
-
+		
+		handler.removeCallbacks(timer);
 		handler.postDelayed(timer, 1000);
 
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,0, Loclist);
