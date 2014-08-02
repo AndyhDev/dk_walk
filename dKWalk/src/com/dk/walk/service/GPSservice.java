@@ -148,6 +148,10 @@ public class GPSservice extends Service implements StepListener {
 		lm.removeUpdates(Loclist);
 		active = false;
 		GPSState = GPS_STATE_PAUSE;
+		SQLiteDataSource dataSource = new SQLiteDataSource(this);
+		dataSource.open();
+		dataSource.updateSQLWay(currentWay);
+		dataSource.close();
 	}
 	public void resumeGPS(){
 		stepDetector.start();
